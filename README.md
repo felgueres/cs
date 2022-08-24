@@ -1,4 +1,4 @@
-### Algos in jupyter notebooks
+### Algos on notebooks
 
 ### Setup 
 
