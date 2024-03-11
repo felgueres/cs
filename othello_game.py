@@ -35,9 +35,6 @@ tests = [((2,5),'W', True),
          ((1,4),'W', True)
          ]
 
-def get_dim(board):
-    return (len(board), len(board[0]))
-
 target = (2,1)
 WHITE = 'W'
 BLACK = 'B'

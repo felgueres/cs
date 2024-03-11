@@ -29,7 +29,7 @@ grid = [
 
 def get_neighbors(u, grid):
     x,y = u
-    #             up,   right, down, left 
+    # up, right, down, left 
     directions = [(-1,0), (0,1), (1,0), (0,-1)]
     neighbors = []
     for (dx,dy) in directions:
