@@ -1,4 +1,4 @@
-# To solve this problem you need dijkstra's algorithm 
+# To solve this problem you need dijkstra's algorithm -- haven't studied this one 
 
 # Minimum Score of a Path Between Two Cities
 

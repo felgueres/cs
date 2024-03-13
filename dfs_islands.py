@@ -26,15 +26,26 @@ grid4 = [[1,1,0,1,1],
          [0,0,1,0,0],
          [0,0,1,0,0]]
 
-test_neighbors = [(grid1, (0,0), [(0,1),(1,1)])]
+grid5 = [[1,1,1,1,0],
+         [1,1,0,1,0],
+         [1,1,0,0,0],
+         [0,0,0,0,0]]
+        
+grid6 = [[1,1,0,0,0],
+         [1,1,0,0,0],
+         [0,0,1,0,0],
+         [0,0,0,1,1]]
+
+test_neighbors = [(grid1, (0,0), [(0,1)])]
 
 test_islands = [(grid1, 2),
                 (grid2, 5),
                 (grid3, 7),
-                (grid4, 2)]
+                (grid4, 2),
+                (grid5, 1)]
 
 def get_neighbors(grid, source):
-    directions = [(-1,0), (0,1), (1,0), (1,-1), (1,1)]
+    directions = [(-1,0), (0,1), (1,0), (1,-1)]
     neighbors = []
     row, col = source
     for (dy,dx) in directions:
@@ -53,18 +64,6 @@ def get_land(grid):
             if grid[row][col] == 1:
                 lands.append((row,col))
     return lands
-
-def search_island(grid, source):
-    path = [source] 
-    visited = set()
-    def dfs(s):
-        for v in get_neighbors(grid, s): # find island neighbors on all directions
-            if v not in visited:
-                visited.add(v) # mark visited
-                path.append(v) # add to path
-                dfs(v) # unlike moving to next element in neighbors, you search for v, this is the depth piece
-    dfs(source)
-    return path
 
 def get_islands(grid):
     visited = set()
