@@ -5,8 +5,8 @@ Apps
 - Explore properites of tree or node, eg. paths, reachability 
 
 Algos
-- BFS, DFS
-- TopoSort. Order DAG such that for every vertex u to v, u comes before v in the ordering
+- BFS, DFS. 
+- TopoSort. Order DAG such that for every vertex u to v, u comes before v in the ordering. Good for longest or shortest path finding linearly. Not good for finding all branches
 
 *Minimum spanning trees (MST).* Connects all weighted vertices with minimum total weight.
 Apps
