@@ -1,5 +1,3 @@
-# To solve this problem you need dijkstra's algorithm -- haven't studied this one 
-
 # Minimum Score of a Path Between Two Cities
 
 # You are given a positive integer n representing n cities numbered from 1 to n. You are also given a 2D array roads where roads[i] = [ai, bi, distancei] indicates that there is a bidirectional road between cities ai and bi with a distance equal to distancei. The cities graph is not necessarily connected.
