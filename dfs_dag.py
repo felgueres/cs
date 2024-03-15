@@ -53,9 +53,53 @@ def find_paths(source,destination,edges):
     dfs([source], 0)
     return all_paths 
 
-paths = find_paths(7,2, edges)
-print(sorted(paths, key=lambda x: x[1], reverse=True)[0][1])
+# paths = find_paths(7,2, edges)
+# print(sorted(paths, key=lambda x: x[1], reverse=True)[0][1])
 
 # notes:
 # because it's a dag, you are guaranteed no cycles so you can skip the visited element of dfs 
 # checking the current path is analogous the checking the visited element, paths are unique
+
+def topological_sort(edges, n):
+    adj_list = {i: [] for i in range(n)}
+    for s, d, _ in edges:
+        adj_list[s].append(d)
+
+    visited = set()
+    topo = []
+
+    def dfs(v):
+        if v not in visited:
+            visited.add(v)
+            for child in adj_list[v]:
+                dfs(child)
+            topo.append(v)
+
+    for v in range(n):
+        if v not in visited:
+            dfs(v)
+
+    return topo[::-1]  # Reverse to get the correct order
+
+
+def longest_path(edges, n, src, dest):
+    adj_list = get_adj_list(edges)
+    topo_order = topological_sort(edges, n)
+    
+    # Initialize distances
+    distance = {v: float('-inf') for v in range(n)}
+    distance[src] = 0
+
+    for v in topo_order:
+        if distance[v] != float('-inf'): # relax // update distannes for v if v is reachable from source
+            print(f'v-> {v}')
+            print(f'{distance}')
+            for u, w in adj_list[v]:
+                if distance[u] < distance[v] + w:
+                    distance[u] = distance[v] + w
+
+    return distance[dest]
+
+longest_path = longest_path(edges, 8, 7, 2)
+print(longest_path)
+
