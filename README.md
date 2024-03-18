@@ -26,7 +26,7 @@ Minimum spanning trees (MST). Connects all weighted vertices with minimum total 
 Algos: MST-Generic, Kruskal, Prim, MST-Reduce
 
 Problems
-- https://medium.com/techie-delight/top-25-depth-first-search-dfs-practice-problems-a620f0ab9faf
+https://medium.com/techie-delight/top-25-depth-first-search-dfs-practice-problems-a620f0ab9faf
 
 ---
 
@@ -42,24 +42,26 @@ xFind all occurrences of a given string in a character matrix (dfs+backtracking)
 xTypes of edges involved in DFS and relation between them (Arrival Times Problem)
 xGenerate list of possible words from a character matrix
 xTraverse given directory using DFS 
+Find the path between given vertices in a directed graph
 
 ---
-
-Traverse given directory using BFS 
-Find the path between given vertices in a directed graph
-Determine if a graph is Bipartite Graph using DFS
-Check if a graph is strongly connected or not using one DFS Traversal
-Find cost of the shortest path in DAG using one pass of Bellman-Ford
-Check if a given graph is strongly connected or not
-Check if given digraph is a DAG (Directed Acyclic Graph) or not
-2-Edge Connectivity in a Graph
-Determine if an undirected graph is a Tree (Acyclic Connected Graph)
-Check if an undirected graph contains cycle or not
-Transitive Closure of a Graph
-Topological Sort Algorithm for DAG using DFS
+Monday - Tuesday
 Find the first k maximum occurring words in a given set of strings
 Find the maximum occurring word in a given set of strings
+Find cost of the shortest path in DAG using one pass of Bellman-Ford
+Topological Sort Algorithm for DAG using DFS
+
+Check if a graph is strongly connected or not using one DFS Traversal
+Check if given digraph is a DAG (Directed Acyclic Graph) or not
+Check if given graph is strongly connected or not
+Check if undirected graph contains cycle or not
+2-Edge Connectivity in a Graph
+Determine if undirected graph is a Tree (Acyclic Connected Graph)
+Determine if graph is Bipartite Graph using DFS
+Transitive Closure of a Graph
 Lexicographic sorting of given set of keys
+
 Inorder, Preorder and Postorder Tree Traversal
+Traverse given directory using BFS 
 
 ---
