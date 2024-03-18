@@ -40,11 +40,12 @@ xDepth First Search (DFS) Implementation
 xFind islands in matrix 
 xFind all occurrences of a given string in a character matrix (dfs+backtracking)
 xTypes of edges involved in DFS and relation between them (Arrival Times Problem)
-Generate list of possible words from a character matrix
+xGenerate list of possible words from a character matrix
+xTraverse given directory using DFS 
 
 ---
 
-Traverse given directory using BFS and DFS in Java
+Traverse given directory using BFS 
 Find the path between given vertices in a directed graph
 Determine if a graph is Bipartite Graph using DFS
 Check if a graph is strongly connected or not using one DFS Traversal
@@ -60,3 +61,5 @@ Find the first k maximum occurring words in a given set of strings
 Find the maximum occurring word in a given set of strings
 Lexicographic sorting of given set of keys
 Inorder, Preorder and Postorder Tree Traversal
+
+---
