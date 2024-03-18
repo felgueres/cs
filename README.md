@@ -40,10 +40,10 @@ xDepth First Search (DFS) Implementation
 xFind islands in matrix 
 xFind all occurrences of a given string in a character matrix (dfs+backtracking)
 xTypes of edges involved in DFS and relation between them (Arrival Times Problem)
+Generate list of possible words from a character matrix
 
 ---
 
-Generate list of possible words from a character matrix
 Traverse given directory using BFS and DFS in Java
 Find the path between given vertices in a directed graph
 Determine if a graph is Bipartite Graph using DFS
