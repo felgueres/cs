@@ -17,7 +17,7 @@ char1 = 'C'
 # Meaning that if you have n instances of character, complexity would be O(V+E * n)
 
 def find_neighbors(grid, position):
-    directions = [(-1,0),(1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1),(-1,1),(-1,-1)]
+    directions = [(-1,0),(1,1),(0,1),(1,0),(1,-1),(0,-1),(-1,1),(-1,-1)]
     row,col = position
     neighbors = []
 
