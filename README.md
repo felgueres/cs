@@ -1,5 +1,7 @@
 # Algorithms
 
+ELEMENTARY GRAPH ALGORITHMS
+
 BFS. Path finding in trees or graphs
 - Explore reachability and path length in trees and graphs 
 
@@ -38,19 +40,19 @@ xFind the longest path in a Directed Acyclic Graph (DAG)
 xFind endpoints for opposite colors (othello game) 
 xDepth First Search (DFS) Implementation
 xFind islands in matrix 
-xFind all occurrences of a given string in a character matrix (dfs+backtracking)
 xTypes of edges involved in DFS and relation between them (Arrival Times Problem)
-xGenerate list of possible words from a character matrix
 xTraverse given directory using DFS 
-Find the path between given vertices in a directed graph
+xFind all occurrences of a given string in a character matrix (dfs+backtrack)
+xGenerate list of possible words from a character matrix (dfs+backtrack)
+xFind the path between given vertices in a directed graph (dfs+backtrack)
 
 ---
 Monday - Tuesday
 Find the first k maximum occurring words in a given set of strings
-Find the maximum occurring word in a given set of strings
 Find cost of the shortest path in DAG using one pass of Bellman-Ford
 Topological Sort Algorithm for DAG using DFS
 
+P1 problems
 Check if a graph is strongly connected or not using one DFS Traversal
 Check if given digraph is a DAG (Directed Acyclic Graph) or not
 Check if given graph is strongly connected or not
@@ -63,5 +65,6 @@ Lexicographic sorting of given set of keys
 
 Inorder, Preorder and Postorder Tree Traversal
 Traverse given directory using BFS 
+Find the maximum occurring word in a given set of strings (Trie)
 
 ---
