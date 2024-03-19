@@ -4,6 +4,12 @@ ELEMENTARY GRAPH ALGORITHMS
 
 BFS. Path finding in trees or graphs
 - Explore reachability and path length in trees and graphs 
+- Shortest paths for unweighted graphs
+
+Relaxation
+- For each vertex v in V, maintain an attribute v.d, which is an upper bound on the weight of a shortest path
+- Tests whether we can improve shortest path to v found so far by going through u, if so, updating v.d and v.pi
+- Shortest paths differ in how many times you relax per edge, Djisktra exactly once, Bellman-Ford (V-1)  
 
 DFS. Path finding in trees and graphs
 - Edge types has info about relationship between edges 
@@ -16,8 +22,8 @@ Edges:
 - forward edges. edge (u,v) connecting vertex u to descendant v in tree. nontree edge
 - cross edges. all other edges connecting vertices as long as one is not descendant on another
 
-TopoSort. Order DAG such that for every vertex U to V, U comes before V in the ordering. Good for longest or shortest path finding in linear time
-- Find shortest paths in linear time
+TopoSort. Order DAG such that for every vertex U to V, U comes before V in the ordering. 
+- Good for longest or shortest path finding in linear time
 
 Strongly Connected Components. Maximal set of vertices such that there is a path from U to V and a path from V to U (one way are not strongly connected)
 - By decomposing into SCC you can analyze dependencies in networks like software modules, social graphs and websites
@@ -45,11 +51,10 @@ xTraverse given directory using DFS
 xFind all occurrences of a given string in a character matrix (dfs+backtrack)
 xGenerate list of possible words from a character matrix (dfs+backtrack)
 xFind the path between given vertices in a directed graph (dfs+backtrack)
+Find cost of the shortest path in DAG using one pass of Bellman-Ford
 
 ---
 Monday - Tuesday
-Find the first k maximum occurring words in a given set of strings
-Find cost of the shortest path in DAG using one pass of Bellman-Ford
 Topological Sort Algorithm for DAG using DFS
 
 P1 problems
@@ -66,5 +71,6 @@ Lexicographic sorting of given set of keys
 Inorder, Preorder and Postorder Tree Traversal
 Traverse given directory using BFS 
 Find the maximum occurring word in a given set of strings (Trie)
+Find the first k maximum occurring words in a given set of strings
 
 ---
