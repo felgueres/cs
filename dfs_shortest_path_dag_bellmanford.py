@@ -24,6 +24,20 @@
 #       RELAX(u,v,w)
 # So overall total running time (V+E) which is linear in the siZe of adj-list
 
+# Bellman-Ford - Solves the single-source shortest-paths problem in the genreal case where edge weight may be negative
+# It returns a boolean whether or not there is a negative-weight cycle that is reachable from the source
+# If there's no such cycle, it produces the shortest paths and their weights
+
+# BELLMAN-FORD(G,w,s)
+#     INITIALIZE-SINGLE_SOURCE(G,s)
+#     for i = 1 to |G.V| - 1
+#         for each edge (u,v) in G.E
+#             RELAX(u,v,w)
+#     for each edge (u,v) in G.E
+#         if v.d > u.d + w(u,v)
+#             return False
+#     return True
+
 edges = [(0, 6, 2), (1, 2, -4), (1, 4, 1), 
          (1, 6, 8), (3, 0, 3), (3, 4, 5), 
          (5, 1, 2), (7, 0, 6), (7, 1, -1), 
@@ -34,48 +48,36 @@ src = 7
 dest = 2
 output: 6
 
-adj_l = { k:[] for k in range(8) }
-for (s,d,w) in edges: 
-    adj_l[s].append((d,w))
-
-visited = set()
-topo = []
-
-# This is equilavent to INIT-SINGLE-SOURCE
-pred = {k: None for k in range(n)} # predecessor of vertex
-dist = {k: float('inf') for k in range(n)} # distance from source to vertex
+# init single source G,s
+dist = {k: float('inf') for k in range(n)} # for each vertex, v.d = inf
+pred = {k: None for k in range(n)} # for each vertex, v.pi = nil
 dist[src] = 0 # distance from source to itself is 0
-
-def toposort(s):
-    if s not in visited:
-        visited.add(s)
-        for (d,_) in adj_l.get(s,[]):
-            toposort(d)
-        topo.append(s)
-
-toposort(src)
-topo = list(reversed(topo))
-print(f"topo:{topo}")
 
 def relax(u,v,w):
     if dist[v] > dist[u] + w:
         dist[v] = dist[u] + w
         pred[v] = u
 
-for u in topo:
-    for v,w in adj_l.get(u,[]):
-        relax(u,v,w)
+for i in range(n-1):
+    for (s,d,w) in edges:
+        relax(s,d,w)
 
-def print_path(src, dest, pred):
-    if dest == src:
-        print(src, end=' ')
-    elif pred[dest] is None:
-        print("No path exists", end=' ')
+for (s,d,w) in edges:
+    if dist[d] > dist[s] + w:
+        print("Negative cycle.")
+
+print('No negative cycles.')
+
+def print_path(s,d,pred):
+    if s == d:
+        print(s, end=' ')
+    elif pred[d] is None:
+        print('No path found')
     else:
-        print_path(src, pred[dest], pred)
-        print(dest, end=' ')
+        print_path(s, pred[d],pred)
+        print(d, end=' ')
 
 print(f'Distance from source {src} to all vertices: {dist}')
 print(f'Shortest path cost from {src} to {dest}: {dist[dest]}')
 print("Shortest path from {} to {}: ".format(src, dest), end='')
-print_path(src, dest, pred)
+print_path(src,dest,pred)
