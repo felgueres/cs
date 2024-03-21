@@ -51,26 +51,23 @@ xTraverse given directory using DFS
 xFind all occurrences of a given string in a character matrix (dfs+backtrack)
 xGenerate list of possible words from a character matrix (dfs+backtrack)
 xFind the path between given vertices in a directed graph (dfs+backtrack)
-Find cost of the shortest path in DAG using one pass of Bellman-Ford
+xFind cost of the shortest path in DAG using one pass of Bellman-Ford
 
 ---
-Monday - Tuesday
-Topological Sort Algorithm for DAG using DFS
-
-P1 problems
+Strongly Connected Components
 Check if a graph is strongly connected or not using one DFS Traversal
-Check if given digraph is a DAG (Directed Acyclic Graph) or not
 Check if given graph is strongly connected or not
-Check if undirected graph contains cycle or not
+Check if undirected graph is a Tree (Acyclic Connected Graph)
+Check if undirected graph contains cycle or **not**
+Check if given digraph is a DAG (Directed Acyclic Graph) or not
+
+Check if graph is Bipartite Graph using DFS
 2-Edge Connectivity in a Graph
-Determine if undirected graph is a Tree (Acyclic Connected Graph)
-Determine if graph is Bipartite Graph using DFS
 Transitive Closure of a Graph
-Lexicographic sorting of given set of keys
 
 Inorder, Preorder and Postorder Tree Traversal
-Traverse given directory using BFS 
-Find the maximum occurring word in a given set of strings (Trie)
+Find the maximum occurring word in a given set of strings
 Find the first k maximum occurring words in a given set of strings
+Lexicographic sorting of given set of keys
 
 ---
