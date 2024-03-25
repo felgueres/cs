@@ -1,4 +1,34 @@
-# Algorithms
+# CS study 
+
+2 weeks // Applied problems are often matrix/graph encoded  
+GRAPHS  
+MATRIX  
+BACKTRACKING  
+
+1 week // Binary trees are basic graphs, often used in real engineering code paths  
+BINARY TREE  
+BINARY SEARCH TREE  
+BINARY SEARCH  
+
+1 week // Useful for list coded problems  
+DIVIDE & CONQUER  
+SLIDING WINDOW  
+TWO POINTERS  
+
+2 week // Core to data manipulation  
+LINKED LIST  
+HASHMAP  
+ARRAY / STRING  
+STACK  
+HEAP  
+TRIE  
+
+1 week // Dynamic Programming  
+DP  
+
+Extra // Math  
+BIT MANIPULATION  
+MATH  
 
 ELEMENTARY GRAPH ALGORITHMS
 
@@ -43,7 +73,7 @@ BFS: https://medium.com/techie-delight/top-20-breadth-first-search-bfs-practice-
 ---
 BFS
 xBreadth-First Search (BFS)
-Transitive closure of a graph
+xTransitive closure of a graph
 Check if a graph is strongly connected or not
 Find root vertex of a graph
 Chess Knight Problem | Find the shortest path from source to destination
