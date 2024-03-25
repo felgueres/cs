@@ -52,14 +52,17 @@ xFind all occurrences of a given string in a character matrix (dfs+backtrack)
 xGenerate list of possible words from a character matrix (dfs+backtrack)
 xFind the path between given vertices in a directed graph (dfs+backtrack)
 xFind cost of the shortest path in DAG using one pass of Bellman-Ford
+xFind cost of the longest path in DAG
 
 ---
+
+Check if undirected graph contains cycle or not
+Check if undirected graph is a Tree (Acyclic Connected Graph)
+Check if given digraph is a DAG or not
+
 Strongly Connected Components
 Check if a graph is strongly connected or not using one DFS Traversal
 Check if given graph is strongly connected or not
-Check if undirected graph is a Tree (Acyclic Connected Graph)
-Check if undirected graph contains cycle or **not**
-Check if given digraph is a DAG (Directed Acyclic Graph) or not
 
 Check if graph is Bipartite Graph using DFS
 2-Edge Connectivity in a Graph
