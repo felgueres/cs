@@ -1,32 +1,32 @@
 # CS study 
 
-2 weeks // Applied problems are often matrix/graph encoded  
+2 weeks
 GRAPHS  
 MATRIX  
 BACKTRACKING  
 
-1 week // Binary trees are basic graphs, often used in real engineering code paths  
+1 week
 BINARY TREE  
 BINARY SEARCH TREE  
-BINARY SEARCH  
+B-TREE
 
-1 week // Useful for list coded problems  
+1 week
 DIVIDE & CONQUER  
 SLIDING WINDOW  
 TWO POINTERS  
 
-2 week // Core to data manipulation  
+2 week
 LINKED LIST  
 HASHMAP  
 ARRAY / STRING  
 STACK  
 HEAP  
-TRIE  
+TRIE
 
-1 week // Dynamic Programming  
+1 week
 DP  
 
-Extra // Math  
+Extra
 BIT MANIPULATION  
 MATH  
 
@@ -74,14 +74,14 @@ BFS: https://medium.com/techie-delight/top-20-breadth-first-search-bfs-practice-
 BFS
 xBreadth-First Search (BFS)
 xTransitive closure of a graph
-Check if a graph is strongly connected or not
-Find root vertex of a graph
+xFind root vertex of a graph
 Chess Knight Problem | Find the shortest path from source to destination
 Shortest path in a maze — Lee Algorithm
 Find the shortest safe route in a field with sensors present
+Find the shortest path from source to destination in a matrix that satisfies given constraints
+Check if a graph is strongly connected or not
 Flood Fill Algorithm
 Count number of islands
-Find the shortest path from source to destination in a matrix that satisfies given constraints
 Find minimum passes required to convert all negative values in a matrix
 Snake and Ladder Problem
 Find the shortest distance of every cell from a landmine inside a maze
