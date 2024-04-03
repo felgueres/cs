@@ -69,6 +69,7 @@ Minimum spanning trees (MST). Connects all weighted vertices with minimum total 
 | Find shortest path in unweighted graph | BFS | Guarantess shortest path due to exploring level by level | V+E or V^2, adj vs matrix, V is when looping to initialize, E is when exploring edges 
 | Unweighted directed graph | BFS | Ideal for unweighted (directed and indirected) as guarentees shortest path by exploring vertices in order of their distance to source | V + E for adjencent list |
 | Find all paths | DFS | Easy to explore all paths. Useful when you don't necessarily need the shortest. | V+E or V^2, adj vs matrix, V is when looping to initialize, E is when exploring edges
+| Find all paths | BFS | This requires a variation, relaxing the constraint of a global visit set. Lets you search all paths and add other constraints | V+E or V^2, adj vs matrix, V is when looping to initialize, E is when exploring edges
 | Find shortest path in weighted graph with negative weights | Bellman-Ford | Relaxation helps find min cost paths and handles negative cycles | On acyclic, you can do V + E by using toposort, otherwise V^2
 | Topo sort | DFS | Useful to improve performance on other alorithms like Bellman-Ford | V + E
 | Minimum depth | BFS | Fits with level-by-level exploration | V + E
