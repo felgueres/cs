@@ -23,6 +23,80 @@ DP
 BIT MANIPULATION  
 MATH  
 
+## DATA STRUCTURES
+
+### Basic ops
+
+
+| OP | Description |
+| --- | ---------- | 
+| SEARCH(S,k) | Given set S and key valu k, return pointer x to an element in S such that x.key = k, or nil if no such element |
+| INSERT(S,x) | Augment set S with the element pointed to by x. |
+| DELETE(S,x) | Given a pointer x to an element in the S, removes x from S. Note this takes a pointer to an element x, not a key value
+| MINIMUM(S) | Query on ordered set that returns a pointer to the element of S with the smallest key
+| MAXIMUM(S) | Query on ordered set that returns a pointer to the element of S with the largest key 
+| SUCCESSOR(S,x) | Given an element x whose key is from a totally ordered set S, returns a pointer to the next larger element in S, or nil if x is the maximum element
+| PREDECESSOR(S,x) | Given an element x whose key is from a totally ordered set S, returns a pointer to the next smaller element in S, or nil if x is the minimum element
+
+**STACK** Insert is called PUSH and DELETE is called a POP. Stacks and queues are dynamic sets in which the element removed is prespecified, so they don't take an element arg.
+
+Stacks are implemented with an array. The array has an attribute S.top that indexes the most recently inserted element.
+
+```js
+STACK-EMPTY(S)
+if S.top == 0:
+    return TRUE
+else return FALSE
+
+// Takes O(1) time
+```
+```js
+PUSH(S,x)
+S.top = S.top + 1
+S[S.top] = x
+
+// Takes O(1) time
+```
+```js
+POP(S)
+if STACK-EMPTY(S) 
+    error "underflow"
+else S.top = S.top - 1
+    return S[S.top + 1]
+
+// Takes O(1) time
+```
+
+**QUEUES** Insert op is called ENQUEUE and delete DEQUEUE and doesn't take an element arg. Queue has a head and a tail. When element is inserted is takes its place on the tail. The element dequeued is always the one at the head.
+
+Queue has attribute Q.head that points or indexes its head, and an attribute Q.tail that indexes the next location at which a new item will arrive. Note the element reside between Q.head ... Q.tail - 1, ie. Q.tail is free.
+
+When Q.tail = Q.head, queue is empty, if dequeue, queue underflows.
+
+Q.tail = Q.head = 1 initially.
+
+When Q.head = Q.tail + 1, queue is full, if you enqueue its a queue overflow
+
+```js
+ENQUEUE(Q,x)
+    Q[Q.tail] = x
+if Q.tail == Q.length
+    Q.tail = 1 // means the head = tail, its full
+else Q.tail = Q.tail + 1 // point to new space
+
+// Takes O(1) time
+```
+```js
+DEQUEUE(Q)
+x = Q[Q.head]
+if Q.head == Q.length:
+    Q.head = 1
+else Q.head = Q.head + 1
+return x
+
+// Takes O(1) time
+```
+
 ## GRAPH ALGORITHMS
 
 BFS. Path finding in trees or graphs
@@ -92,7 +166,7 @@ xFind minimum passes required to convert all negative values in a matrix
 xFind the shortest distance of every cell from a landmine inside a maze
 xFind maximum cost path in a graph from a given source to a given destination
 xSnake and Ladder Problem
-Total paths in a digraph from a given source to a destination having exactly `m` edges
+xTotal paths in a digraph from a given source to a destination having exactly `m` edges
 Least cost path in a digraph from a given source to a destination having exactly `m` edges
 Compute the least cost path in a weighted digraph using BFS
 Check if an undirected graph contains a cycle or not
