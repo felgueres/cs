@@ -50,6 +50,7 @@ else return FALSE
 
 // Takes O(1) time
 ```
+
 ```js
 PUSH(S,x)
 S.top = S.top + 1
@@ -86,6 +87,7 @@ else Q.tail = Q.tail + 1 // point to new space
 
 // Takes O(1) time
 ```
+
 ```js
 DEQUEUE(Q)
 x = Q[Q.head]
@@ -97,9 +99,92 @@ return x
 // Takes O(1) time
 ```
 
+**LINKEDLISTS** Objects are arranged in linear order but unlike arrays where order is determined by indices, the order in a linked list is determined by a pointer in each object. LL support all basic ops, although not efficiently. 
+
+The doubly linked list is an object with attribute key and two other pointer attributes: next and prev. The object may contain other satellite data. 
+
+If x.prev = nil, x has no predecessor which means it's the head. if x.next = nil, it's the tail.
+
+| List Form | Attributes | 
+| --------- | ----------- |
+| Singly    | No prev pointer |
+| Doubly    | Has both pointers |
+| Sorted    | Linearly order by key. Min key value is the head. Max key is the head |
+| Unsorted  | Any order | 
+| Circular  | Prev pointer of the head points to the tail |  
+| Non-circular | Head has no prev pointer to tail | 
+
+```js
+LIST-SEARCH(L,k)
+x = L.head
+while x != nil and x.key != k:
+    x = x.next
+return x
+
+//Takes O(n) time since it may have to search the entire list in the worst case
+```
+
+```js
+LIST-INSERT(L,k)
+x.next = L.head
+if L.head != nil:
+    L.head.prev = x
+L.head = x
+x.prev = nil
+
+//This insert is on head, making k the first element (pushing the head to the right). Relevant when implementing a stack. Requires no traversal of the list.
+// Inserting using the head or tail pointer is O(1), inserting in arbitrary position is worst-case O(n)
+
+```
+
+```js
+LIST-DELETE(L,x)
+// x is a pointer. this splices x out of the list by updating pointers
+// to delete for a given key, you first need to LIST-SEARCH its pointer
+if x.prev != nil:
+    x.prev.next = x.next
+else L.head = x.next
+if x.next != nil
+    x.next.prev = x.prev
+
+// Deleteing runs in O(1) but if you wish to delete an element with a given key, takes O(n) because you first need to find the index for it. 
+```
+Introduction to algorithms, pg. 239
+
+**Sentinels** help you ignore the boundary conditions at head and tail, which make it easier to code.
+
+Suppose you provide with list L an object L.nil that represents NIL but has all the attributes of other objects in the list.
+Whenever you have a reference to Nil in list code, you can replace it with L.nil
+
+Using a sentinel or dummy, you can replace references, eliminate the need to keep L.head and L.tail attributes.
+
+So you get:
+
+```js
+LIST-SEARCH'(L,k)
+x = L.nil.next
+while x!=L.nil and x.key!=k
+    x = x.next
+return x
+```
+
+```js
+LIST-DELETE'(L,x)
+x.prev.next = x.next
+x.next.prev = x.prev
+```
+
+```js
+LIST-INSERT'(L,x)
+x.next = L.nil.next // L.nil.next points to current head of list
+L.nil.next.prev = x  // L.nil.next.prev is prev from current head of list
+L.nil.next = x // L.nil.next now replaces current head to new inserted 
+x.prev = L.nil // Point the new head to L.nil again
+```
+
 ## GRAPH ALGORITHMS
 
-BFS. Path finding in trees or graphs
+**BFS**. Path finding in trees or graphs
 - Uses FIFO queue, eg. adds from the right, takes from the left, [1,2,3,4]  1 got in first and will be popped out first too
 - Explore reachability and path length in trees and graphs 
 - Shortest paths for unweighted graphs
@@ -107,32 +192,33 @@ BFS. Path finding in trees or graphs
 - Serial/Deserial of binary tree
 - The ops of dequeing and queuing is constant - O(1) -, so total time devoted to queing and dequeing is O(V), scanning the adjency lists take O(E), therefore this algo takes O(V+E) 
 
-Relaxation
-- For each vertex v in V, maintain an attribute v.d, which is an upper bound on the weight of a shortest path
-- Tests whether we can improve shortest path to v found so far by going through u, if so, updating v.d and v.pi
-- Shortest paths differ in how many times you relax per edge, Djisktra exactly once, Bellman-Ford (V-1) 
-- Note that bellman-ford is designed for digraphs, using on undigraphs is super complex 
 
-DFS. Path finding in trees and graphs
+**DFS**. Path finding in trees and graphs
 - Edge types has info about relationship between edges 
 - Backtracking properties. Reversible to previous state, ensures exploration of all paths 
 - Keeping track of times. Serves to find timeline of exploration, useful for detecting cycles and understanding graph
 - Complexity in its base case is O(V+E) on an adj list and O(V^2) on a matrix
 - Initalizing the algo takes V, visiting the nodes takes E 
 
-Edges:
+**Edge types**
 - tree edges. edge (u,v) if v first discovered by exploring (u,v)
 - back edges. edge (u,v) connecting vertex u to ancestor v. self-loops in directed graphs are also back edges
 - forward edges. edge (u,v) connecting vertex u to descendant v in tree. nontree edge
 - cross edges. all other edges connecting vertices as long as one is not descendant on another
 
-TopoSort. Order DAG such that for every vertex U to V, U comes before V in the ordering. 
+**Relaxation**
+- For each vertex v in V, maintain an attribute v.d, which is an upper bound on the weight of a shortest path
+- Tests whether we can improve shortest path to v found so far by going through u, if so, updating v.d and v.pi
+- Shortest paths differ in how many times you relax per edge, Djisktra exactly once, Bellman-Ford (V-1) 
+- Note that bellman-ford is designed for digraphs, using on undigraphs is super complex 
+
+**TopoSort**. Order DAG such that for every vertex U to V, U comes before V in the ordering. 
 - Good for longest or shortest path finding in linear time
 
-Strongly Connected Components. Maximal set of vertices such that there is a path from U to V and a path from V to U (one way are not strongly connected)
+**Strongly Connected Components**. Maximal set of vertices such that there is a path from U to V and a path from V to U (one way are not strongly connected)
 - By decomposing into SCC you can analyze dependencies in networks like software modules, social graphs and websites
 
-Minimum spanning trees (MST). Connects all weighted vertices with minimum total weight.
+**Minimum spanning trees (MST)**. Connects all weighted vertices with minimum total weight.
 - Wire an electronic circuit with least amount of wire
 - Algorithms: MST-Generic, Kruskal, Prim, MST-Reduce
 
@@ -147,8 +233,6 @@ Minimum spanning trees (MST). Connects all weighted vertices with minimum total 
 | Find shortest path in weighted graph with negative weights | Bellman-Ford | Relaxation helps find min cost paths and handles negative cycles | On acyclic, you can do V + E by using toposort, otherwise V^2
 | Topo sort | DFS | Useful to improve performance on other alorithms like Bellman-Ford | V + E
 | Minimum depth | BFS | Fits with level-by-level exploration | V + E
-| Cycle detection in digraph
-| Connected components 
 
 #### Problem sets
 **BFS** https://medium.com/techie-delight/top-20-breadth-first-search-bfs-practice-problems-ac2812283ab1
@@ -167,12 +251,12 @@ xFind the shortest distance of every cell from a landmine inside a maze
 xFind maximum cost path in a graph from a given source to a given destination
 xSnake and Ladder Problem
 xTotal paths in a digraph from a given source to a destination having exactly `m` edges
-Least cost path in a digraph from a given source to a destination having exactly `m` edges
-Compute the least cost path in a weighted digraph using BFS
+xLeast cost path in a digraph from a given source to a destination having exactly `m` edges
+\\Compute the least cost path in a weighted digraph using BFS
 Check if an undirected graph contains a cycle or not
 Check if a graph is strongly connected or not
-Find the minimum depth of a binary tree
-Find the path between given vertices in a directed graph
+xFind the minimum depth of a binary tree
+xFind the path between given vertices in a directed graph
 Print all nodes of a perfect binary tree in a specific order
 Level order traversal of a binary tree
 Print right view of a binary tree
@@ -206,3 +290,6 @@ xCheck if undirected graph contains cycle or not
  Find the maximum occurring word in a given set of strings
  Find the first k maximum occurring words in a given set of strings
  Lexicographic sorting of given set of keys
+
+**LINKEDLISTS** http://cslibrary.stanford.edu/105/LinkedListProblems.pdf
+

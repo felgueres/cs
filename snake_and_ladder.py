@@ -21,52 +21,50 @@ board = [
 ]
 
 Output: 7
-Explanation: The game requires at least 7 dice throws to win.
-
-Doing this problem by manipulating the matrix is complicated.
-Better to reprent the matrix as an adj list. 
-Find the shortest path between 1 and 100.
-This is a great problem because shows resourcefulness, skill, and tests graph understanding.
 
 """
-
-
-ladder = {80: 99, 1: 38, 51: 67, 4: 14, 21: 42, 72: 91, 9: 31, 28: 84}
-snake = {64: 60, 17: 7, 98: 79, 54: 34, 87: 36, 93: 73, 62: 19, 95: 75}
-
-# create edge list
-n = 10 * 10 
-edges = []
-for i in range(1,n+1):
-    j = 1
-    while j <= 6 and i + j <= n:
-        source = i
-        dest = i + j
-        cur_ladder = ladder.get(dest, 0)
-        cur_snake = snake.get(dest,0)
-        if cur_snake > 0 or cur_ladder > 0: dest = cur_ladder + cur_snake
-        edges.append((source,dest))
-        j += 1
-
 from collections import deque
 
-def find_min_moves(edges, source=1, destination=100):
-    adj_list = { k : [] for k in range(source,destination+1) }
-    for (s,d) in edges: adj_list[s].append(d)
-    queue = deque([(source, 0)])
-    visited = set((source))
-    while queue:
-        source, moves = queue.popleft()
-        print(f"{source}, {moves}")
-        for neighbor in adj_list.get(source):
+def find_min_moves():
+    ladder = {80: 99, 1: 38, 51: 67, 4: 14, 21: 42, 72: 91, 9: 31, 28: 84}
+    snake = {64: 60, 17: 7, 98: 79, 54: 34, 87: 36, 93: 73, 62: 19, 95: 75}
+    board_size = 10 * 10 
+    nums = range(1,board_size+1)
+    # create an edge list
+    # for every number, create an edge to number + 1 .. 6
+    # check ladders and snakes and replace their corresponding value 
+    edges = []
+    for num in nums: # n * 6
+        for i in range(1,7): 
+            cur_dest = num + i
+            if cur_dest in ladder:
+                edges.append((num, ladder[cur_dest]))
+            elif cur_dest in snake:
+                edges.append((num, snake[cur_dest]))
+            elif cur_dest <= 100:
+                edges.append((num, num+i))
+            else:
+                break
+    
+    # shortest path  
+    adj_list = {k:[] for k in nums}
+    for (u,v) in edges: adj_list[u].append(v)
+    src = 1
+
+    Q = deque([(src,0)])
+    visited = set()
+
+    while Q:
+        node,step = Q.popleft()
+
+        if node == 100:
+            return step
+
+        for neighbor in adj_list.get(node,[]):
             if neighbor not in visited:
-                if neighbor == destination:
-                    return moves+1 
-                queue.append((neighbor, moves+1))
+                Q.append((neighbor, step+1))
                 visited.add(neighbor)
-    return -1
+    
+    return -1 
 
-min_moves = find_min_moves(edges)
-print(f"Min moves: {min_moves}")
-
-# Runs on O(V+E), V from looping to initialize each Vertex and E from visiting the edges 
+print(find_min_moves())
