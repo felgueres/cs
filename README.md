@@ -1,31 +1,8 @@
 # CS 
 
-GRAPHS  
-MATRIX  
-BACKTRACKING  
-
-BINARY TREE  
-BINARY SEARCH TREE  
-B-TREE
-
-DIVIDE & CONQUER  
-SLIDING WINDOW  
-TWO POINTERS  
-
-LINKED LIST  
-HASHMAP  
-ARRAY / STRING  
-STACK  
-HEAP  
-TRIE
-
-DP
-BIT MANIPULATION  
-MATH  
-
 ## DATA STRUCTURES
 
-### Basic ops
+### Basic ops on dynamic sets
 
 
 | OP | Description |
@@ -68,9 +45,9 @@ else S.top = S.top - 1
 // Takes O(1) time
 ```
 
-**QUEUES** Insert op is called ENQUEUE and delete DEQUEUE and doesn't take an element arg. Queue has a head and a tail. When element is inserted is takes its place on the tail. The element dequeued is always the one at the head.
+**QUEUES** Insert op is called ENQUEUE and delete DEQUEUE - both dont take an element argument. Queue has a head and a tail. When element is inserted it takes its place on the tail. The element dequeued is always the one at the head.
 
-Queue has attribute Q.head that points or indexes its head, and an attribute Q.tail that indexes the next location at which a new item will arrive. Note the element reside between Q.head ... Q.tail - 1, ie. Q.tail is free.
+Queue has attribute Q.head that points or indexes its head, and an attribute Q.tail that indexes the next location at which a new item will arrive. The elements reside between Q.head ... Q.tail - 1, ie. Q.tail is free.
 
 When Q.tail = Q.head, queue is empty, if dequeue, queue underflows.
 
@@ -293,3 +270,18 @@ xCheck if undirected graph contains cycle or not
 
 **LINKEDLISTS** http://cslibrary.stanford.edu/105/LinkedListProblems.pdf
 
+
+TODO:
+
+DIVIDE & CONQUER  
+SLIDING WINDOW  
+TWO POINTERS  
+BIT MANIPULATION  
+DP
+
+HASHMAP  
+HEAP  
+TRIE
+BINARY TREE  
+BINARY SEARCH TREE  
+B-TREE
