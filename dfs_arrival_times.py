@@ -15,12 +15,12 @@ timeline = {k:[] for k in range(nodes)}
 def dfs(u):
     global time
     visited.add(u)
-    time += 1
+    time += 1 # first visited
     timeline[u].append(time)
     for v in adj.get(u,[]):
         if v not in visited:
             dfs(v)
-    time += 1
+    time += 1 # on exit
     timeline[u].append(time)
 
 for u in range(nodes):
