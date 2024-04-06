@@ -194,6 +194,19 @@ x.prev = L.nil // Point the new head to L.nil again
 
 **Strongly Connected Components**. Maximal set of vertices such that there is a path from U to V and a path from V to U (one way are not strongly connected)
 - By decomposing into SCC you can analyze dependencies in networks like software modules, social graphs and websites
+- SCC uses \( G \) transposed, \( G^{T} \), which is the edges of \(G\) with edge directions reversed 
+- Given adjacency -list representation of G, time to create \( G^{T} \) is \( O (V+E) \)
+- SCC is computed using 2 dfs, one on \( G \) and another on \( G_{T} \)
+- The first dfs pass gets you sorted graph by desc order of finishing times to ensure that on the second pass you can isolate the SCC in a single dfs per SCC. When you start the 2nd dfs from the highest finishing time and in order, you will cover all vertices within a single SCC before moving to another SCC. The reversal of edges prevents you to reach another SCC, effectively isolating each SCC per DFS call 
+
+```js
+STRONGLY-CONNECTED-COMPONENTS(G)
+1 call DFS(G) to compute finish times u.f for each vertex u 
+2 create G transposed
+3 call DFS(Gt), but in the main loop DFS, consider vertices in order of decreasing u.f
+4 output the vertices of each tree in the depth-first formed in line 3 as a separate strongly connected component
+```
+
 
 **Minimum spanning trees (MST)**. Connects all weighted vertices with minimum total weight.
 - Wire an electronic circuit with least amount of wire
@@ -230,10 +243,10 @@ xSnake and Ladder Problem
 xTotal paths in a digraph from a given source to a destination having exactly `m` edges
 xLeast cost path in a digraph from a given source to a destination having exactly `m` edges
 \\Compute the least cost path in a weighted digraph using BFS
-Check if an undirected graph contains a cycle or not
-Check if a graph is strongly connected or not
+xCheck if an undirected graph contains a cycle or not
 xFind the minimum depth of a binary tree
 xFind the path between given vertices in a directed graph
+Check if a graph is strongly connected or not
 Print all nodes of a perfect binary tree in a specific order
 Level order traversal of a binary tree
 Print right view of a binary tree
@@ -256,10 +269,9 @@ xFind the path between given vertices in a directed graph (dfs+backtrack)
 xFind cost of the shortest path in DAG using one pass of Bellman-Ford
 xFind cost of the longest path in DAG
 xCheck if undirected graph contains cycle or not
- Check if undirected graph is a Tree (Acyclic Connected Graph)
+xCheck if undirected graph is a Tree (Acyclic Connected Graph)
+xCheck if a graph is strongly connected 
  Check if given directed graph is a DAG or not
- Check if a graph is strongly connected or not using one DFS Traversal
- Check if given graph is strongly connected or not
  Check if graph is Bipartite Graph using DFS
  2-Edge Connectivity in a Graph
  Transitive Closure of a Graph
@@ -279,9 +291,9 @@ TWO POINTERS
 BIT MANIPULATION  
 DP
 
-HASHMAP  
+HASH TABLE 
 HEAP  
 TRIE
 BINARY TREE  
-BINARY SEARCH TREE  
+BINARY SEARCH TREE 
 B-TREE
