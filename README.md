@@ -206,7 +206,9 @@ STRONGLY-CONNECTED-COMPONENTS(G)
 3 call DFS(Gt), but in the main loop DFS, consider vertices in order of decreasing u.f
 4 output the vertices of each tree in the depth-first formed in line 3 as a separate strongly connected component
 ```
-
+**k-edge-connected graph**. A connected graph is k-edge-connected if it remains connected whenever fewer than k edges are removed. Edge connectivity of a graph is the largest k for which the graph is k-edge-connected.
+- A 2-edge-connected graph means you can delete any one edge and the graph will still be connected, it's often used to determine redundancy  
+- If after the removal of an edge `e`, the graph becomes disconnected, then `e` is a bridge edge 
 
 **Minimum spanning trees (MST)**. Connects all weighted vertices with minimum total weight.
 - Wire an electronic circuit with least amount of wire
@@ -242,11 +244,10 @@ xFind maximum cost path in a graph from a given source to a given destination
 xSnake and Ladder Problem
 xTotal paths in a digraph from a given source to a destination having exactly `m` edges
 xLeast cost path in a digraph from a given source to a destination having exactly `m` edges
-\\Compute the least cost path in a weighted digraph using BFS
+\\\Compute the least cost path in a weighted digraph using BFS
 xCheck if an undirected graph contains a cycle or not
 xFind the minimum depth of a binary tree
 xFind the path between given vertices in a directed graph
-Check if a graph is strongly connected or not
 Print all nodes of a perfect binary tree in a specific order
 Level order traversal of a binary tree
 Print right view of a binary tree
@@ -271,17 +272,16 @@ xFind cost of the longest path in DAG
 xCheck if undirected graph contains cycle or not
 xCheck if undirected graph is a Tree (Acyclic Connected Graph)
 xCheck if a graph is strongly connected 
- Check if given directed graph is a DAG or not
- Check if graph is Bipartite Graph using DFS
- 2-Edge Connectivity in a Graph
- Transitive Closure of a Graph
+xCheck if given directed graph is a DAG or not
+xCheck if graph is Bipartite Graph using DFS
+\\\2-Edge Connectivity in a Graph
+xTransitive Closure of a Graph
  Inorder, Preorder and Postorder Tree Traversal
  Find the maximum occurring word in a given set of strings
  Find the first k maximum occurring words in a given set of strings
  Lexicographic sorting of given set of keys
 
 **LINKEDLISTS** http://cslibrary.stanford.edu/105/LinkedListProblems.pdf
-
 
 TODO:
 
