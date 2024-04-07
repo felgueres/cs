@@ -159,7 +159,7 @@ L.nil.next = x // L.nil.next now replaces current head to new inserted
 x.prev = L.nil // Point the new head to L.nil again
 ```
 
-## GRAPH ALGORITHMS
+## GRAPHS 
 
 **BFS**. Path finding in trees or graphs
 - Uses FIFO queue, eg. adds from the right, takes from the left, [1,2,3,4]  1 got in first and will be popped out first too
@@ -207,8 +207,88 @@ STRONGLY-CONNECTED-COMPONENTS(G)
 4 output the vertices of each tree in the depth-first formed in line 3 as a separate strongly connected component
 ```
 **k-edge-connected graph**. A connected graph is k-edge-connected if it remains connected whenever fewer than k edges are removed. Edge connectivity of a graph is the largest k for which the graph is k-edge-connected.
-- A 2-edge-connected graph means you can delete any one edge and the graph will still be connected, it's often used to determine redundancy  
-- If after the removal of an edge `e`, the graph becomes disconnected, then `e` is a bridge edge 
+- A 2-edge-connected graph means you can delete any one edge and the graph will still be connected, it's often used to determine network redundancy  
+- A bridge of \( G \) is an edge whose removal disconnects G
+- An articulation point of \( G \) is a vertex whose removal disconnects \( G \)
+
+**Finding Bridge Edges** 
+Time: \(O(V + E)\)
+
+An edge \((v,to)\) is a bridge iff none of the vertices \(to\) and its descendants in the DFS tree has a back-edge to vertex v or any ancestor.
+
+Meaning that there's no way from \(v\) to \(to\) except for edge \((v,to)\)
+
+You can infer this from 'time of entry into node'.
+
+$tin[v]$  denote entry time for node  
+$low$   array which will let us check the fact for each vertex $v$ 
+$low[v]$  is the minimum of:  
+- $tin[v]$ 
+- the entry times $tin[p]$  for each node $p$  that is connected to node $v$  via a back-edge $(v, p)$ 
+- $low[to]$ for each vertex $to$ which is a direct descendant of $v$  in the DFS tree
+
+There is a back edge from vertex $v$ or one of its  descendants to one of its ancestors if and only if vertex $v$ has a child $to$ for which $low[v]$ < $tin[v]$.
+
+If $low[v]$ = $tin[v]$, the back edge comes directly to $v$, otherwise it comes to an ancestor of $v$.
+
+Thus, \((v,to)\) in DFS is a bridge if and only if $low[to]$ > $tin[v]$
+
+**Binary Search Trees**. All basic dynamic-set ops work are supported.
+
+Basic ops on the binary search tree take time proportional to the height of the tree.
+
+For a complete binary tree with *n nodes* run in \( O(log n) \) i
+
+If the tree is a linear chain of *n nodes*, the same ops take \( O(n) \) worst time.
+
+A variation, the red-black tree, guarantees a height of \( O(log n) \).
+
+> Keys in BST satisfy:
+> Let x be a node in a BST.
+> If y is a node in the left subtree of x, then y.key <= x.key 
+> If y is a node in the right subtree of x, then y.key >= x.key
+
+This property enables:
+- INORDER-TREE-WALK: Prints key of the root of a subtree *between* printing the values in its left subtree and printing those in the right subtree
+- PREORDER-TREE-WALK: Prints the root *before* the values in either subtree.
+- POSTORDER-TREE-WALK: Prints the root *after* the values in its subtrees.
+
+```js
+INORDER-TREE-WALK(x)
+if x!= NIL
+    INORDER-TREE-WALK(x.left)
+    print(x.key)
+    INORDER-TREE-WALK(x.right)
+
+// Takes O(n) time to walk an n-node BST, the procedure calls itself twice per node 
+```
+
+TODO: Write why dynamic-set ops run on O(h) where h is the height of the tree
+
+**Red-Black Trees** Red-black tree is a scheme to balance the tree in order to guarantee that basic dynamic-set ops take O(lg n) worst case instead of O(h).
+
+RB-tree is a BST with one extra bit of storage per node - `color` - which is either red or black.
+
+Colors help to constrain paths such that no path from the root to a leaf is more than twice  as any other, ie. the tree is balanced.
+
+```py
+class RBTreeNode:
+    self.key
+    self.color
+    self.left
+    self.right
+```
+
+Red-black properties
+1. Every node is either red or black
+2. Root is black
+3. Every leaf (nil) is black
+4. If a node is red, then both children are black
+5. For each node, all simple paths from the node to descendant leaves contain the same number of black nodes
+
+TODO: 
+- Implement basic ops on RBTREE
+- Cover B-TREES, basic ops, B-TREE-SEARCH, B-TREE-CREATE, B-TREE-INSERT
 
 **Minimum spanning trees (MST)**. Connects all weighted vertices with minimum total weight.
 - Wire an electronic circuit with least amount of wire
@@ -290,10 +370,5 @@ SLIDING WINDOW
 TWO POINTERS  
 BIT MANIPULATION  
 DP
-
 HASH TABLE 
-HEAP  
-TRIE
-BINARY TREE  
-BINARY SEARCH TREE 
-B-TREE
+HEAP
