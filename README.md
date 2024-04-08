@@ -307,6 +307,10 @@ TODO:
 | Minimum depth | BFS | Fits with level-by-level exploration | V + E
 
 #### Problem sets
+
+**CSES** https://cses.fi/problemset/list/
+- Rounded problem set and intro to competitive programming 
+
 **BFS** https://medium.com/techie-delight/top-20-breadth-first-search-bfs-practice-problems-ac2812283ab1
 
 xBreadth-First Search (BFS)
@@ -331,7 +335,6 @@ xFind the path between given vertices in a directed graph
 Print all nodes of a perfect binary tree in a specific order
 Level order traversal of a binary tree
 Print right view of a binary tree
-Bipartite Graph
 
 **DFS** https://medium.com/techie-delight/top-25-depth-first-search-dfs-practice-problems-a620f0ab9faf
 xReplace all occurrences of 0 that are surrounded by 1 in a binary matrix
@@ -354,21 +357,15 @@ xCheck if undirected graph is a Tree (Acyclic Connected Graph)
 xCheck if a graph is strongly connected 
 xCheck if given directed graph is a DAG or not
 xCheck if graph is Bipartite Graph using DFS
-\\\2-Edge Connectivity in a Graph
+x2-Edge Connectivity in a Graph
 xTransitive Closure of a Graph
- Inorder, Preorder and Postorder Tree Traversal
+xInorder, Preorder and Postorder Tree Traversal
  Find the maximum occurring word in a given set of strings
  Find the first k maximum occurring words in a given set of strings
  Lexicographic sorting of given set of keys
 
+
 **LINKEDLISTS** http://cslibrary.stanford.edu/105/LinkedListProblems.pdf
 
-TODO:
-
-DIVIDE & CONQUER  
-SLIDING WINDOW  
-TWO POINTERS  
-BIT MANIPULATION  
-DP
-HASH TABLE 
-HEAP
+ Network Delay Time
+ Shortest Routes I
