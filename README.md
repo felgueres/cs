@@ -1,9 +1,9 @@
 # CS 
 
+
 ## DATA STRUCTURES
 
-### Basic ops on dynamic sets
-
+**Basic ops on dynamic sets**
 
 | OP | Description |
 | --- | ---------- | 
@@ -169,7 +169,6 @@ x.prev = L.nil // Point the new head to L.nil again
 - Serial/Deserial of binary tree
 - The ops of dequeing and queuing is constant - O(1) -, so total time devoted to queing and dequeing is O(V), scanning the adjency lists take O(E), therefore this algo takes O(V+E) 
 
-
 **DFS**. Path finding in trees and graphs
 - Edge types has info about relationship between edges 
 - Backtracking properties. Reversible to previous state, ensures exploration of all paths 
@@ -191,6 +190,28 @@ x.prev = L.nil // Point the new head to L.nil again
 
 **TopoSort**. Order DAG such that for every vertex U to V, U comes before V in the ordering. 
 - Good for longest or shortest path finding in linear time
+
+**Dijkstra**. 
+- Efficient for shortest path to single source
+- Requires graph to have positive weights
+- Uses priority queue to go to next node with minimum length. Priority queues access value in O(1) but to pop takes O(log n) 
+- After you process a node, its distances are final
+
+```js
+//Dijkstra
+INITIALIZE-SINGLE-SOURCE
+S = empty
+Q = empty 
+for each vertex u in G.V
+    INSERT(Q,u)
+while Q != empty:
+    u = EXTRACT-MIN(Q)
+    S = S union {u} // Update S with u, u is considered to be settled 
+    for each vertex v in G.adj[u]:
+        RELAX(u,v,w)
+        if the call of relax decreased v.d:
+            DECREASE-KEY(Q,v,v.d)
+```
 
 **Strongly Connected Components**. Maximal set of vertices such that there is a path from U to V and a path from V to U (one way are not strongly connected)
 - By decomposing into SCC you can analyze dependencies in networks like software modules, social graphs and websites
@@ -294,78 +315,31 @@ TODO:
 - Wire an electronic circuit with least amount of wire
 - Algorithms: MST-Generic, Kruskal, Prim, MST-Reduce
 
-#### Heuristics
+#### Scenarios 
 
 | Scenario | Algorithm | Reason | Complexity |
 | -------- | --------- | ------ | ---------- |
-| Find shortest path in unweighted graph | BFS | Guarantess shortest path due to exploring level by level | V+E or V^2, adj vs matrix, V is when looping to initialize, E is when exploring edges 
-| Unweighted directed graph | BFS | Ideal for unweighted (directed and indirected) as guarentees shortest path by exploring vertices in order of their distance to source | V + E for adjencent list |
+| Unweighted undirected graph shortest path | BFS | Guarantees shortest path due to exploring level by level | V+E or V^2, adj vs matrix, V is when looping to initialize, E is when exploring edges 
+| Unweighted directed graph shortest path | BFS | Ideal for unweighted (directed and indirected) as guarentees shortest path by exploring vertices in order of their distance to source | V + E for adjencent list |
+| Weighted directed/undirected graph with negative weights shortest path | Bellman-Ford | Relaxation helps find min cost paths and handles negative cycles | On acyclic, you can do V + E by using toposort, otherwise V^2
+| Weighted directed/undirected graph with only positive weights shortest path | Dijkstra's | Generalizes BFS for weighted graphs. Maintains distances to nodes and reduces during search. Processes each edge once. More efficient using fact there are no negative edges. FIFO is replaced by a priority-queue. | Maintains min-priority Q by calling 3 ops: INSERT, EXTRACT-MIN, DECREASE-KEY. INSERT & EXTRACT-MIN are called once per vertex. Each u in V is added to set S once, each edge in adj list is examined once. O(V^2) is the typical running time. EXTRACT-MIN requires searching the queue at O(V), if heap is implemented with binary-min-heap takes O(logV). Overall this is considered O(E log k) where k is number of elements in the heap and E is edges|
 | Find all paths | DFS | Easy to explore all paths. Useful when you don't necessarily need the shortest. | V+E or V^2, adj vs matrix, V is when looping to initialize, E is when exploring edges
 | Find all paths | BFS | This requires a variation, relaxing the constraint of a global visit set. Lets you search all paths and add other constraints | V+E or V^2, adj vs matrix, V is when looping to initialize, E is when exploring edges
-| Find shortest path in weighted graph with negative weights | Bellman-Ford | Relaxation helps find min cost paths and handles negative cycles | On acyclic, you can do V + E by using toposort, otherwise V^2
 | Topo sort | DFS | Useful to improve performance on other alorithms like Bellman-Ford | V + E
 | Minimum depth | BFS | Fits with level-by-level exploration | V + E
 
 #### Problem sets
 
-**CSES** https://cses.fi/problemset/list/
-- Rounded problem set and intro to competitive programming 
+CSES https://cses.fi/problemset/list/
 
-**BFS** https://medium.com/techie-delight/top-20-breadth-first-search-bfs-practice-problems-ac2812283ab1
+BFS https://medium.com/techie-delight/top-20-breadth-first-search-bfs-practice-problems-ac2812283ab1
 
-xBreadth-First Search (BFS)
-xTransitive closure of a graph
-xFind root vertex of a graph
-xChess Knight Problem 
-xShortest path in a maze — Lee Algorithm
-xFind shortest safe route in a field with sensors present
-\Find shortest path from source to destination in a matrix that satisfies given constraints 
-xFlood Fill Algorithm
-xCount number of islands
-xFind minimum passes required to convert all negative values in a matrix
-xFind the shortest distance of every cell from a landmine inside a maze
-xFind maximum cost path in a graph from a given source to a given destination
-xSnake and Ladder Problem
-xTotal paths in a digraph from a given source to a destination having exactly `m` edges
-xLeast cost path in a digraph from a given source to a destination having exactly `m` edges
-\\\Compute the least cost path in a weighted digraph using BFS
-xCheck if an undirected graph contains a cycle or not
-xFind the minimum depth of a binary tree
-xFind the path between given vertices in a directed graph
-Print all nodes of a perfect binary tree in a specific order
-Level order traversal of a binary tree
-Print right view of a binary tree
+DFS https://medium.com/techie-delight/top-25-depth-first-search-dfs-practice-problems-a620f0ab9faf
 
-**DFS** https://medium.com/techie-delight/top-25-depth-first-search-dfs-practice-problems-a620f0ab9faf
-xReplace all occurrences of 0 that are surrounded by 1 in a binary matrix
-xReplace all occurrences of 0 that are not surrounded by 1 in a binary matrix
-xFlood Fill Algorithm
-xFind length of the longest path in the matrix with consecutive characters
-xFind the longest path in a Directed Acyclic Graph (DAG)
-xFind endpoints for opposite colors (othello game) 
-xDepth First Search (DFS) Implementation
-xFind islands in matrix 
-xTypes of edges involved in DFS and relation between them (Arrival Times Problem)
-xTraverse given directory using DFS 
-xFind all occurrences of a given string in a character matrix (dfs+backtrack)
-xGenerate list of possible words from a character matrix (dfs+backtrack)
-xFind the path between given vertices in a directed graph (dfs+backtrack)
-xFind cost of the shortest path in DAG using one pass of Bellman-Ford
-xFind cost of the longest path in DAG
-xCheck if undirected graph contains cycle or not
-xCheck if undirected graph is a Tree (Acyclic Connected Graph)
-xCheck if a graph is strongly connected 
-xCheck if given directed graph is a DAG or not
-xCheck if graph is Bipartite Graph using DFS
-x2-Edge Connectivity in a Graph
-xTransitive Closure of a Graph
-xInorder, Preorder and Postorder Tree Traversal
- Find the maximum occurring word in a given set of strings
- Find the first k maximum occurring words in a given set of strings
- Lexicographic sorting of given set of keys
+LINKEDLISTS http://cslibrary.stanford.edu/105/LinkedListProblems.pdf
 
+#### Sources 
 
-**LINKEDLISTS** http://cslibrary.stanford.edu/105/LinkedListProblems.pdf
+Introduction to Algorithms (3rd Edition)
 
- Network Delay Time
- Shortest Routes I
+Competitive Programmer's Handbook https://cses.fi/book/book.pdf
