@@ -35,8 +35,24 @@ def query(s,d,num_cities):
             if not discovered[neig]:
                 if distances[neig] > distances[cur_node] + w:
                     distances[neig] = distances[cur_node] + w 
-                    heapq.heappush(queue, (distances[neig],neig)) # tuple is w,key, where w is used to heapify O(ln n)
+                    heapq.heappush(queue, (distances[neig],neig)) # tuple is w,key, where w is used to heapify O(ln n) V + (E * lg n) 
     return distances[d] if distances[d] != float('inf') else -1
 
 for s,d in queries:
     print(query(s,d,num_cities))
+
+discovered = [False] * (num_cities +1) # O(V)
+distances = [float('inf')] * (num_cities+1) # O(V)
+distances[s] = 0 # O(1)
+queue = [(0,s)] # 0 to be used as priority in queue O(1)
+
+while queue:
+    _,cur_node = heapq.heappop(queue) # O(1) 
+    discovered[cur_node] = True # O(1)
+    for (neig, w) in adj[cur_node]: # O(E)
+        if not discovered[neig]:
+            if distances[neig] > distances[cur_node]+w:
+                distances[neig] = distances[cur_node]+w # O(1)
+                heapq.heappush(queue, (distances[neig],neig)) # (log n)
+
+# total time: V + (E * log n)

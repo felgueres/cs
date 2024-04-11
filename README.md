@@ -315,6 +315,26 @@ TODO:
 - Wire an electronic circuit with least amount of wire
 - Algorithms: MST-Generic, Kruskal, Prim, MST-Reduce
 
+**Trees**. 
+- Acyclic, connected graph with n nodes and n-1 edges. Removing any edge makes 2 components. Adding any edge to a tree creates a cycle. 
+- There's always a unique path between any two nodes of a tree
+- Leaves are nodes with 1 degree, i.e. only one neighbor (it's parent)
+- In a rooted tree, one node is appointed the root of the tree.
+- Rooted tree is recursive: each node of the tree acts as the root of a subtree that contains the node itself and all nodes that are in the subtrees of its children
+- Tree traversal algorithms are easier to implement because there are no cycles and you cant reach a node from multiple directions
+- DFS is the typical way to traverse a tree
+- Diameter of tree T= (V,E) is the largest of all shortest-path distances in the tree. You can do dfs from an arbitrary node and get the farthest which will be an endpoint `a`, run dfs again on `a` and the longest distance is the diameter [codeforces tutorial](https://codeforces.com/blog/entry/101271#:~:text=A%20diameter%20of%20the%20tree,simple%20path%20a%E2%86%92b\).).
+
+```cpp
+// dfs tree traversal
+void dfs(int current_node, int previous_node){
+    for (auto neig: adj[current_node]){
+        if (u!=previous_node) 
+            dfs(u,current_node)
+    }
+}
+```
+
 #### Scenarios 
 
 | Scenario | Algorithm | Reason | Complexity |
