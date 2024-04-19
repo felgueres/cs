@@ -363,3 +363,14 @@ LINKEDLISTS http://cslibrary.stanford.edu/105/LinkedListProblems.pdf
 Introduction to Algorithms (3rd Edition)
 
 Competitive Programmer's Handbook https://cses.fi/book/book.pdf
+
+## REFACTORING
+
+why refactor?
+- make it easy to add a feature
+- make it easy for humans to understand
+
+How to refactor?
+- make solid set of tests for that section of code
+- make changes in small steps, run tests often to isolate new bugs
+
