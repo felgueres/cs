@@ -1,4 +1,4 @@
-# CS 
+# ```CS```
 
 
 ## DATA STRUCTURES
@@ -369,31 +369,35 @@ Competitive Programmer's Handbook https://cses.fi/book/book.pdf
 In-place matrix transpose
 
 Consider m x m matrix:
+```python
 > for r in range(m):
-> > for c in range(r+1, m): # diagonal, avoid swapping same elements
+> > for c in range(r+1, m): # diagonal
 > > > matrix[c][r],matrix[r][c]=matrix[r][c],matrix[c][r]
-> END
+```
 
 To rotate it you can reverse the rows or cols for +-90deg
 
 ## REFACTORING
 
+> The programs that live best and longest are those with short functions
+
+This section are my notes from [Martin Fowler's Refactoring book.](https://martinfowler.com/books/refactoring.html)
+
 Why refactor?
 - make it easy to add a feature
 - make it easy for humans to understand
-- because it makes us faster -- to add features, to fix bugs
+- makes us faster -- to add features, to fix bugs
+- aesthetics is a bad reason for refactoring
 
 How to refactor?
 - make solid set of tests for that section of code
 - make changes in small steps, run tests
+- run time and space profiler to find hot spots 
 
-Performance
-- Run program under a profiler of time and space. Find hot spots 
-
-Common signs to improve code quality
-- Unclear names. Code needs to be mundane and clear
-- Duplicated code.
-- Long Functions. The programs that live best and longest are those with short functions. Whenever you feel the need to comment something, write a function instead. Length is not so much about LOC but the semantic length between what the method does and how it does it. Conditionals and loops often are good to decompose. Switching on the same conditions multiple times is often good for polymorphism. 
+Common signs 
+- Unclear names, code needs to be mundane and clear
+- Duplicated code within same class
+- Long Functions. Whenever you feel the need to comment something, write a function instead. Length is not so much about LOC but the semantic length between what the method does and how it does it. Conditionals and loops often are good to decompose. Switching on the same conditions multiple times is often good for polymorphism. 
 - Long Parameter list. If several params always fit together, combine into param object.  
-- Mutable data. Changing data often introduces tricky bugs. Functional programming uses the notion that data should never change, creating copies of data with the change, leaving old unchanged. 
+- Mutable data. Changing data often introduces tricky bugs. Functional programming uses the notion that data should never change only creating copies of data with the change.
 - Loops. Use first-class functions instead, replace loops with pipeline ops like filter and map.
