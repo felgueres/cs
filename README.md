@@ -358,6 +358,10 @@ DFS https://medium.com/techie-delight/top-25-depth-first-search-dfs-practice-pro
 
 LINKEDLISTS http://cslibrary.stanford.edu/105/LinkedListProblems.pdf
 
+#### TODOs
+- [Find bridges in binary matrix](https://leetcode.com/problems/disconnect-path-in-a-binary-matrix-by-at-most-one-flip/description/)
+- [Implement LRU Cache](https://leetcode.com/problems/lru-cache/)
+
 #### Sources 
 
 Introduction to Algorithms (3rd Edition)
@@ -376,6 +380,48 @@ Consider m x m matrix:
 ```
 
 To rotate it you can reverse the rows or cols for +-90deg
+
+## SYSTEM DESIGN
+- Clarify functional and non-functional requirements
+- Do capacity estimations (space / day, request per second)
+  - Network 
+  - Space Capacity
+  - Users
+  - Daily Active Users
+- Do API design
+- Do high level database design for main entitires
+  - Describe schemas
+  - Relationships
+- Do component design
+- Refine design
+- Think of corner cases and bottlenecks
+  - Most common are databases
+- Talk tradeoffs and other approaches
+
+When to use CDNs?
+- Used to deliver static, pre-cached content globally
+- Not used for dynamic content
+- To use point your DNS to a CDN like cloudflare. On a request it first goes to the CDN, if the content requested is in the cache, returns it, else (cache miss) it'll act as a reverse proxy and route to your server. 
+
+What is the CAP theorem?
+- Consistency: every read from the system gets the latest data 
+- Availability: every request receives a response without guarantee that it contains the most recent write
+- Parition tolerance: system continues to operate despite arbitrary number of messages being dropped or delayed by network nodes
+Choose two!
+
+Databases
+- Master-Slave. Master is read/write, slave/replicas are read only. Slaves have a slight delay, aka, eventual consistency
+- Sharding. Distribute data across different dbs such that each db only manages a subset of data, like User[A-C], User[D-F] ... as users volume increase, more shards are added 
+- Sharding increases cache hits, less read and write traffic, less replication. Index size is also reduced which generally improves performance with faster queries 
+- Indexes are usually self-balancing B-Tree which keeps data sorted and allows searches, insertions and deletions in log(n)
+
+PostGresQL. Relational, datamodel is rows and cols. Scales vertically. Strong consistency and accuracy and complex queries.
+
+WideColumnStore. Casssandra (Facebook) / BigTable. NoSQL. Maintains in lexicographic order, allowing efficient retrieval of selective key ranges. Highly scalable and available. After memtable is full, it's flushed (async) and updates the index. Read ops are O(logn) and write is O(1).
+
+Resources
+- [System Design Primer](https://github.com/donnemartin/system-design-primer?tab=readme-ov-file)
+- [Webdev Scalability Harvard Lecture CS75](https://www.youtube.com/watch?v=-W9F__D3oY4)
 
 ## REFACTORING
 
