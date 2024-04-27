@@ -335,6 +335,8 @@ void dfs(int current_node, int previous_node){
 }
 ```
 
+- **Euler tour.** A cycle that traverses each edge of G excactly once, although it is allowed to visit each vertex more than once.
+ 
 #### Scenarios 
 
 | Scenario | Algorithm | Reason | Complexity |
@@ -368,7 +370,7 @@ Introduction to Algorithms (3rd Edition)
 
 Competitive Programmer's Handbook https://cses.fi/book/book.pdf
 
-## MATRIX
+## Useful operations 
 
 In-place matrix transpose
 
@@ -380,6 +382,13 @@ Consider m x m matrix:
 ```
 
 To rotate it you can reverse the rows or cols for +-90deg
+
+**sum natural numbers**. 
+
+$n*(n+1)/2$​
+
+eg. $n=5$, $1+2+3+4+5=5*(5+1)/2=15$
+
 
 ## SYSTEM DESIGN
 - Clarify functional and non-functional requirements
