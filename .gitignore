@@ -1,3 +1,5 @@
 .ipynb_checkpoints
 ml/names.txt
 deeplearning/*
+data/img/
+venv/
