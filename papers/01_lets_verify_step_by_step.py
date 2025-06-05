@@ -87,6 +87,14 @@ Conclusion
 - Process-supervised learning produces more reliable reward models than outcome-based
 - Active learning helps lower the cost of human data collection by sampling most valuable examples 
 - PRM is a negative "tax" for alignment (better) since gives you ability to provide continuous feedback  
+- Best of N means sample a lot of solutions and score them with a reward model. Return the one that does the best
+- With a good enough reward model, BoN (best of N) beats consensus (generate bunch of answers pick the most common)
+- BoN is ultimately bottlenecked by a reward model
+
+How to do research?
+- Planning is a good domain for academic research. Because large companies prefer high upfront costs and low inference costs, so their incentives are there. 
+- You only need a few examples to prove out an idea
+- What's critical is to have a good external verifier so you're not being bottlenecked by reward model quality
 
 Follow ups 
 1. X. Wang, J. Wei, D. Schuurmans, Q. Le, E. Chi, and D. Zhou. Self-consistency
@@ -98,5 +106,6 @@ improves chain of thought reasoning in language models.
 models are zero-shot reasoners. 
   Why it matters? 
     - Shows that models can do this zero-shot conditioned only on a simple prompt.
+repro: https://huggingface.co/meta-llama/Llama-3.2-1B
 
 '''
