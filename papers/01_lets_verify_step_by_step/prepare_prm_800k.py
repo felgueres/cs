@@ -26,12 +26,12 @@ for example in examples:
             else:
                 partial_solution = current_step
             input_text = f"Problem: {problem}\n\nSolution so far:\n{partial_solution}"
-            rating_to_label = {-1: 0, 0: 1, 1: 2}  # Convert to 0,1,2 for classification
+            rating_to_label = {-1: 0, 0: 1, 1: 2}
             label = rating_to_label[completion['rating']]
             formatted_data.append({
                 'input_text': input_text,
                 'label': label,
-                'rating': completion['rating']  # Keep original for reference
+                'rating': completion['rating']
             })
         if step['chosen_completion'] is not None:
             chosen_text = step['completions'][step['chosen_completion']]['text']

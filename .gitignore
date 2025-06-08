@@ -5,3 +5,4 @@ data/img/
 venv/
 papers/*/data/
 papers/*/models/
+wandb/
