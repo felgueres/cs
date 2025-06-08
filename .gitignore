@@ -3,3 +3,5 @@ ml/names.txt
 deeplearning/*
 data/img/
 venv/
+papers/*/data/
+papers/*/models/

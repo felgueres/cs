@@ -8,3 +8,4 @@ transformers
 huggingface_hub
 wandb
 peft
+matplotlib

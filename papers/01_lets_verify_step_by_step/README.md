@@ -108,3 +108,18 @@ models are zero-shot reasoners.
     - Shows that models can do this zero-shot conditioned only on a simple prompt.
 repro: https://huggingface.co/meta-llama/Llama-3.2-1B
 
+======================
+
+### Paper implementation
+
+PRM800K - Dataset
+
+rating,cnt
+ 1, 638994
+-1, 234440
+ 0, 92921
+ 
+examples are built like this:
+- problem_statement_1 + step_1, label_1
+- problem_statement_1 + step_1 + step_2, label_2
+- problem_statement_1 + step_1 + step_2 + ... + step_n, label_n
