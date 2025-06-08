@@ -1,7 +1,0 @@
-Loading GSM8K data...
-Train examples: 7473
-Test examples: 1319
-Loading Gemma-2B with LoRA...
-Loading checkpoint shards: 100%|█████████████████████████████████| 2/2 [00:07<00:00,  3.93s/it]
-Model device: mps:0
-Model dtype: torch.float16
