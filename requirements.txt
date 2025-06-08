@@ -2,3 +2,9 @@ pillow
 torch
 numpy
 torchvision
+datasets
+mlx-lm 
+transformers
+huggingface_hub
+wandb
+peft

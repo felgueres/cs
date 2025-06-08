@@ -1,0 +1,15 @@
+{"time":"2025-06-07T18:51:24.793961-07:00","level":"INFO","msg":"stream: starting","core version":"0.20.1","symlink path":"/Users/pablo/programming/cs/wandb/run-20250607_185124-tke5lfpn/logs/debug-core.log"}
+{"time":"2025-06-07T18:51:24.991594-07:00","level":"INFO","msg":"stream: created new stream","id":"tke5lfpn"}
+{"time":"2025-06-07T18:51:24.991623-07:00","level":"INFO","msg":"stream: started","id":"tke5lfpn"}
+{"time":"2025-06-07T18:51:24.991632-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"tke5lfpn"}
+{"time":"2025-06-07T18:51:24.99164-07:00","level":"INFO","msg":"handler: started","stream_id":"tke5lfpn"}
+{"time":"2025-06-07T18:51:24.991646-07:00","level":"INFO","msg":"sender: started","stream_id":"tke5lfpn"}
+{"time":"2025-06-07T18:51:25.169482-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-07T18:51:35.218185-07:00","level":"INFO","msg":"stream: closing","id":"tke5lfpn"}
+{"time":"2025-06-07T18:51:35.218456-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-07T18:51:35.219101-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-07T18:51:35.704936-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-07T18:51:35.862418-07:00","level":"INFO","msg":"handler: closed","stream_id":"tke5lfpn"}
+{"time":"2025-06-07T18:51:35.862477-07:00","level":"INFO","msg":"sender: closed","stream_id":"tke5lfpn"}
+{"time":"2025-06-07T18:51:35.864799-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"tke5lfpn"}
+{"time":"2025-06-07T18:51:35.865194-07:00","level":"INFO","msg":"stream: closed","id":"tke5lfpn"}
