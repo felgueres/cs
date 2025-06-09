@@ -142,5 +142,3 @@ trainer.train()
 print("Saving PRM model...")
 trainer.save_model("./prm_final_model")
 tokenizer.save_pretrained("./prm_final_model")
-
-print("PRM training complete!")
