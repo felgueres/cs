@@ -36,8 +36,8 @@ wandb.init(
 print("Loading PRM data...")
 train_df = pd.read_csv(BASE_DIR / "papers" / "01_lets_verify_step_by_step" / "data" / "prm800k" / "phase2_train.csv")
 
-# Sample down for initial testing
-SAMPLE_SIZE = 50000  # Start here!
+# Reduce sample size even further for OOM issues
+SAMPLE_SIZE = 50000  # Reduced from 2000
 if len(train_df) > SAMPLE_SIZE:
     train_df = train_df.sample(n=SAMPLE_SIZE, random_state=42)
     print(f"Sampled down to {SAMPLE_SIZE} examples")
@@ -56,7 +56,8 @@ model = AutoModelForSequenceClassification.from_pretrained(
     num_labels=3,  # 3 classes: 0, 1, 2 (for ratings -1, 0, +1)
     torch_dtype=torch.float16,
     device_map="auto",
-    low_cpu_mem_usage=True
+    low_cpu_mem_usage=True,
+    use_cache=False  # Disable KV cache to save memory
 )
 
 print(f"Model device: {model.device}")
@@ -75,6 +76,11 @@ lora_config = LoraConfig(
 model = get_peft_model(model, lora_config)
 model.print_trainable_parameters()
 
+# Ensure LoRA parameters are in float32 for gradient computation
+for param in model.parameters():
+    if param.requires_grad:
+        param.data = param.data.float()
+
 trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
 print(f"Trainable parameters: {trainable_params}")
 
@@ -85,9 +91,9 @@ print("Tokenizing datasets...")
 def tokenize_batch(examples):
     model_inputs = tokenizer(
         examples['input_text'],
-        max_length=1024,  # Longer for PRM since we have problem + solution
+        max_length=512,  # Reduced from 1024
         truncation=True,
-        padding="max_length",
+        padding=True,  # Dynamic padding instead of max_length
         return_tensors="pt"
     )
     
@@ -109,29 +115,33 @@ def compute_metrics(eval_pred):
 
 training_args = TrainingArguments(
     output_dir="./prm_model",
-    num_train_epochs=2,
-    per_device_train_batch_size=8,
-    per_device_eval_batch_size=8,
-    gradient_accumulation_steps=16,
-    warmup_steps=100,
+    num_train_epochs=2,  # Reduced from 2
+    per_device_train_batch_size=2,  # Reduced from 8
+    per_device_eval_batch_size=2,  # Reduced from 8
+    gradient_accumulation_steps=32,  # Increased to maintain effective batch size
+    warmup_steps=100,  # Reduced from 100
     learning_rate=1e-5,
-    logging_steps=100,
+    logging_steps=100,  # Reduced from 100
     eval_strategy="steps",
-    eval_steps=500,
-    save_steps=1000,
-    save_total_limit=2,
-    load_best_model_at_end=True,
+    eval_steps=500,  # Reduced from 500
+    save_steps=1000,  # Reduced from 1000
+    save_total_limit=1,  # Reduced from 2
+    load_best_model_at_end=False,  # Disable to save memory
     metric_for_best_model="accuracy",
     greater_is_better=True,
     report_to="wandb",
     dataloader_pin_memory=False,
+    bf16=True,  # Use bf16 instead of fp16 for better stability
+    gradient_checkpointing=True,  # Trade compute for memory
+    dataloader_num_workers=0,  # Reduce CPU memory usage
+    remove_unused_columns=False,  # Keep all columns for debugging
 )
 
 trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=train_dataset,
-    eval_dataset=train_dataset.select(range(1000)),  # Use subset of training data for eval
+    eval_dataset=train_dataset.select(range(2000)),  # Much smaller eval set
     data_collator=data_collator,
     compute_metrics=compute_metrics,
 )
