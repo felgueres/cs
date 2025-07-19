@@ -37,7 +37,7 @@ print("Loading ORM data...")
 train_df = pd.read_csv(BASE_DIR / "papers" / "01_lets_verify_step_by_step" / "data" / "prm800k" / "orm_train.csv")
 
 # Reduce sample size for memory management
-SAMPLE_SIZE = 50000
+SAMPLE_SIZE = 1000
 if len(train_df) > SAMPLE_SIZE:
     train_df = train_df.sample(n=SAMPLE_SIZE, random_state=42)
     print(f"Sampled down to {SAMPLE_SIZE} examples")
@@ -163,29 +163,3 @@ trainer.train()
 print("Saving ORM model...")
 trainer.save_model("./orm_final_model")
 tokenizer.save_pretrained("./orm_final_model")
-
-# Test the trained ORM
-print("\nTesting ORM with sample problems...")
-
-test_examples = [
-    "Problem: If 3x + 5 = 14, what is x?\n\nSolution:\n3x + 5 = 14\n3x = 14 - 5\n3x = 9\nx = 3",  # Correct solution
-    "Problem: If 3x + 5 = 14, what is x?\n\nSolution:\n3x + 5 = 14\n3x = 14 + 5\n3x = 19\nx = 19/3"  # Incorrect solution
-]
-
-model.eval()
-for i, example in enumerate(test_examples):
-    inputs = tokenizer(example, return_tensors="pt", max_length=512, truncation=True)
-    inputs = {k: v.to(model.device) for k, v in inputs.items()}
-    
-    with torch.no_grad():
-        outputs = model(**inputs)
-        logits = outputs.logits
-        probs = torch.softmax(logits, dim=-1)
-        predicted_class = torch.argmax(logits, dim=-1).item()
-        
-    print(f"Example {i+1}: {'Correct' if predicted_class == 1 else 'Incorrect'}")
-    print(f"Confidence: {probs[0][predicted_class]:.3f}")
-    print(f"Probabilities: Incorrect={probs[0][0]:.3f}, Correct={probs[0][1]:.3f}")
-    print("-" * 50)
-
-print("ORM training complete!") 
