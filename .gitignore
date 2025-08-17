@@ -7,4 +7,5 @@ papers/*/data/
 papers/*/models/
 wandb/
 *.gz
-ml/oai_lets_verify_step_by_step
+ml/oai_lets_verify_step_by_step/data
+ml/oai_lets_verify_step_by_step/models
