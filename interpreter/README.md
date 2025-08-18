@@ -9,6 +9,6 @@ So what are the steps to build an interpreter:
 2) Parser: Creates a tree following language-specific grammar rules. 
 3) Static analysis: <Unclear what this does>
 
-learnings:
+Learnings:
 - Good practice to separate the code that generates an error and the code that reports it
 
