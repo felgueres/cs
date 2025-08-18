@@ -1,0 +1,7 @@
+counter = 0
+pointer = 0
+
+while len(names) > pointer
+    pointer += 1
+
+print(pointer == len(namesl)

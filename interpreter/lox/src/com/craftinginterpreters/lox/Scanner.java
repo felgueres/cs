@@ -133,7 +133,7 @@ class Scanner {
 
     private char peekNext(){
         if (current + 1 >= source.length()) return '\0';
-        return source.chatAt(current+1);
+        return source.charAt(current+1);
     }
 
     private boolean isAlpha(char c) {
