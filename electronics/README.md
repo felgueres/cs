@@ -1,7 +1,5 @@
 # ```Electronics```
 
-We've inherited many of nature's secrets, putting them together in service of others is noble but ultimately one of the most exciting things we can do in the modern world. 
-
 How does one go at building a programmable microcontroller that reads information from the world and controls a device using I/O pins? 
 
 **Theory**: voltage, current, resistance, capacitance, inductance, laws and theorems
