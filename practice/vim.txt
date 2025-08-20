@@ -1,0 +1,3 @@
+command,effect
+ys$], wrap to end of line 
+yss], wrap whole line
