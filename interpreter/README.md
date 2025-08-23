@@ -34,16 +34,29 @@ NEXT: Implementing Syntax Trees (page. 58)
 
 3) Static analysis: <Unclear what this does>
 
-Compile:
+Steps:
 
 ```bash 
-javac -d ./lox/out $(find ./lox/src -name "*.java")
-```
+// compile folder
+$ javac -d ./lox/out $(find ./lox/src -name "*.java")
 
-Run:
-```bash
+// Generate Expr.java
+$ java -cp lox/out com.craftinginterpreters.tool.GenerateAst lox/src/com/craftinginterpreters/lox
+
+// compile generated Expr 
+$ javac -d ./lox/out $(find ./lox/src -name "*.java")
+
+// Run interpreter
 java -cp ./lox/out com.craftinginterpreters.lox.Lox <file[optional]>
+
 ```
 
 notes:
 - Good practice to separate the code that generates an error and the code that reports it
+
+OOP: classes with methods
+functional: types and functions are distinct. to impl operation for different types you define a single function and use pattern matching for each type all in one place. conversely adding a new type means updating every function 
+visitor pattern lets you do approx functional style in oop 
+
+overloading: when two funcs have same name but differ in the parameter list. the runtime decides which one to call based on the args used
+
