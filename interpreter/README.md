@@ -8,7 +8,6 @@ Working through the book Crafting Interpreters.
 Goals
 =====
 * Build a scanner, parser, evaluator in Java, redo in C
-* Design a new grammar (tbd)
 
 Usage
 =====

@@ -10,3 +10,4 @@ wandb/
 ml/oai_lets_verify_step_by_step/data
 ml/oai_lets_verify_step_by_step/models
 interpreter/lox/out/*
+data/input.txt
