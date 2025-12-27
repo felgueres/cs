@@ -9,15 +9,37 @@ Learnings:
 - batch_size is the number of independent sequences passed to GPUs, for efficiency
 - negative_loss_likelihood is equivalent to cross_entropy in pytorch
 
+Input Tensor Shape: [ batch_size , block_size ]
+
+batch_size = number of sequences processed in parallel
+block_size = number of tokens (time steps) per sequence
+
+                    ┌───────────────────────────────────┐
+Sequence 1 (sample) │ t1   t2   t3   t4   ...   tN      │
+                    ├───────────────────────────────────┤
+Sequence 2 (sample) │ t1   t2   t3   t4   ...   tN      │
+                    ├───────────────────────────────────┤
+Sequence 3 (sample) │ t1   t2   t3   t4   ...   tN      │
+                    ├───────────────────────────────────┤
+        ...         │ ...  ...  ...  ...  ...  ...      │
+                    ├───────────────────────────────────┤
+Sequence B (sample) │ t1   t2   t3   t4   ...   tN      │
+                    └───────────────────────────────────┘
+                         ↑                       ↑
+                         └─── block_size (N) ────┘
+        ↑
+        └──────────── batch_size (B) ─────────────┘
 '''
 
 import torch
+torch.manual_seed(42)
 
 # input here is all the works from shakespeare downloaded from
 # wget https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt
 
-with open('../data/input.txt', 'r') as f: text = f.read()
+with open('./data/input.txt', 'r') as f: text = f.read()
 chars = sorted(list(set(text)))
+vocab_size = len(chars) 
 
 stoi = { ch: i for i,ch in enumerate(chars)}
 itos = { i: ch for i,ch in enumerate(chars)}
@@ -70,6 +92,10 @@ def get_batch(split="train"):
     return x,y
 
 xb,yb = get_batch()
+
+'''
+Timestamp on video: 21:35
+
 print(f"xb: {xb}\nyb:{yb}")
 
 for b in range(batch_size): 
@@ -77,9 +103,6 @@ for b in range(batch_size):
         context = xb[b, :t+1]
         target = yb[b,t]
         print(f"when input is {context.tolist()} the target: {target}")
-
-'''
-Timestamp on video: 21:35
 
 xb: tensor([[53, 53,  5, 42,  1, 51, 43,  1],
         [43, 56, 48, 59, 56, 43, 42,  1],
@@ -112,16 +135,19 @@ class BigramLanguageModel(nn.Module):
         # each token directly reads off the logits for the next token from a lookup table
         self.token_embedding_table = nn.Embedding(vocab_size, vocab_size)
 
-    def forward(self,idx,targets):
+    def forward(self,idx,targets=None):
+        logits = self.token_embedding_table(idx) # (B,T,C)
         # idx and targets are both (B,T) tensor of integers
         # B = batch which is 4 (batch_size)
         # T = time which is 8 (block_size)
         # C = channels which is vocab_size
-        logits = self.token_embedding_table(idx) # (B,T,C)
-        B,T,C = logits.shape
-        logits = logits.view(B*T, C) # this is just reshaping to conform w pytorch api
-        targets = targets.view(B*T)
-        loss = F.cross_entropy(logits,targets) # measures quality of predictions vs. targets
+        if targets == None:
+            loss = None
+        else:
+            B,T,C = logits.shape
+            logits = logits.view(B*T, C) # this is just reshaping to conform w pytorch api
+            targets = targets.view(B*T)
+            loss = F.cross_entropy(logits,targets) # measures quality of predictions vs. targets
         return logits, loss
 
     def generate(self,idx,max_new_tokens):
@@ -129,7 +155,7 @@ class BigramLanguageModel(nn.Module):
         for _ in range(max_new_tokens):
             # get predictions
             logits, loss = self(idx) # this calls forward with a few hooks to track gradients
-            # focus only on the last time step
+            # focus only on the last time step (plucks out the last in the time dimension)
             logits = logits[:, -1, :] # becomes (B,C)
             # apply softmax to get probabilities
             probs=F.softmax(logits, dim=1) # (B,C)
@@ -137,9 +163,110 @@ class BigramLanguageModel(nn.Module):
             idx_next = torch.multinomial(probs,num_samples=1) # (B,1)
             # append sampled index to the running sequence
             idx = torch.cat((idx,idx_next), dim=1) # (B,T+1)
+        return idx
 
-vocab_size = 65
+
+"""
 m = BigramLanguageModel(vocab_size)
 logits, loss = m(xb,yb)
+print(logits.shape)
 print(loss)
+# Predicting and concatenating outputs to create sequence
+print(decode(m.generate(torch.zeros((1,1), dtype=torch.long), max_new_tokens=100)[0].tolist()))
+$ SKIcLT;AcELMoTbvZv C?nq-QE33:CJqkOKH-q;:la!oiywkHjgChzbQ?u!3bLIgwevmyFJGUGp wnYWmnxKWWev-tDqXErVKLgJ
+GIBERRISH! That's because we haven't trained the model but we go from single token to concatenating max_new_tokens!
+"""
+
+# Now we actually need to train model
+# A typical learning rate (lr) is 3e-4 but for smaller nn like this one, bigger number is ok
+
+batch_size = 32
+first_step = True
+eval_iters = 10_000 
+learning_rate = 1e-3
+
+"""
+optimizer = torch.optim.AdamW(m.parameters(), lr=1e-3)
+for steps in range(eval_iters):
+    # sample a batch of data
+    xb,yb = get_batch('train')
+    # evaluate the loss
+    logits, loss = m(xb,yb)
+    if first_step: 
+        print(f"Init loss: {loss.item():.2f}")
+        first_step=False
+    optimizer.zero_grad(set_to_none=True)
+    loss.backward()
+    optimizer.step()
+    # print here all loss.item() to see the improvement!
+
+print(f"Loss after {eval_iters} eval_iters: {loss.item():.2f}")
+print(f"GENERATED OUTPUT")
+print(decode(m.generate(torch.zeros((1,1), dtype=torch.long), max_new_tokens=300)[0].tolist()))
+
+OUTPUT 
+------
+
+LA c wo the;
+Pancalolinghowhatharean:
+QA:
+
+Wwhass bowoond;
+Fomere d shdeenotep.
+CI y mbotot swefesealso br. ave aviasurf my, yxMPZI ivee iuedrd whar ksth y h bora s be hese, woweee; the! KI 'de, ulseecherd d o blllando;LUCEO, oraingofof win!
+RIfans picspeserer hee anf,
+TOFonk? me ain ckntoty dedo bo
+
+# MUCH BETTER BUT IT AINT SHAKESPEARE YET
+# This model is very simple and tokens are not talking to each other, it's simply predicting next token T+1 using T only
+# Video TS to resume: https://youtu.be/kCc8FmEb1nY?si=qQmXZXDp1NRIAdxR&t=2275
+"""
+
+# hyperparams
+batch_size = 32 # number of independent sequecnes to process in parallel
+block_size = 8 # maximum context length for prediction
+max_iters = 3000
+eval_interval=300
+learning_rate = 1e-2
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+eval_iters = 200
+# ---------------
+
+
+torch.manual_seed(1337)
+
+model = BigramLanguageModel(vocab_size)
+m = model.to(device)
+optimizer = torch.optim.AdamW(model.parameters(),lr=learning_rate)
+
+@torch.no_grad()
+def estimate_loss():
+    out = {}
+    model.eval()
+    for split in ['train', 'val']:
+        losses = torch.zeros(eval_iters)
+        for k in range(eval_iters):
+            X,Y = get_batch(split)
+            logits, loss = model(X,Y)
+            losses[k] = loss.item()
+        out[split] = losses.mean()
+    model.train()
+    return out
+
+for iter in range(max_iters):
+    # every once in a while evaluate the loss on train and eval sets
+    if iter % eval_interval == 0:
+        losses = estimate_loss()
+        print(f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
+
+    # sample data
+    xb,yb = get_batch('train')
+    # evaluate loss
+    logits,loss = model(xb,yb)
+    optimizer.zero_grad(set_to_none=True)
+    loss.backward()
+    optimizer.step()
+
+context = torch.zeros((1,1), dtype=torch.long, device=device)
+print(decode(m.generate(torch.zeros((1,1), dtype=torch.long), max_new_tokens=300)[0].tolist()))
 
