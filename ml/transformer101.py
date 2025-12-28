@@ -15,9 +15,14 @@ Learnings:
 - Autoregressive means that each token representation is computed using past and current tokens only, never future ones, which is introduced by the causal mask (bottom triangular mask)
 - Heads are attention heads, where a heaad is one independent self-attention operation with its own Q,K,V projection. During training there are emerging properties they might specialize on but they're not controllable, or assigned, any specialization is emergent and soft. However there are ways to bias or constrain heads by applying different masks per head.
 - Good questions to ask on over sellers: 1) can the specialization be ablated? 2) Are heads hard-constraineed or probed after training? Do you enforce the heads via masking?
+- Q, K, V are Query, Key, Value matrices. People attach names and ideas but concretely they derive their meaning from math semantics as used in the equation, so:
+weights = softmax(Q Kᵀ)
+output  = weights V
+Q is the thing that queries via a dot product
+K is the thing being queried against
+V is the thing whose contents get returned
 
 Input Tensor Shape: [ batch_size , block_size ]
-
 Input Tensor Shape: [ batch_size , block_size ]
 
 batch_size = number of sequences processed in parallel
