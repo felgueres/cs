@@ -6,6 +6,7 @@ https://www.youtube.com/watch?v=kCc8FmEb1nY&list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhR
 
 Learnings:
 - [Attention Is All You Need](https://arxiv.org/pdf/1706.03762): We're implementing the decoder-only part of this paper. The left-side is the encoder which is used in machine translation and connects to this transformer using cross-attention.
+- [Neural Machine Translation By Jointly Learning To Align and Translate](https://arxiv.org/pdf/1409.0473): This paper introduced attention mechanism, later a core component in the transformer.
 - block_size is max length of context for prediction 
 - batch_size is the number of independent sequences passed to GPUs, for efficiency
 - negative_loss_likelihood is equivalent to cross_entropy in pytorch
@@ -15,7 +16,7 @@ Learnings:
 - Autoregressive means that each token representation is computed using past and current tokens only, never future ones, which is introduced by the causal mask (bottom triangular mask)
 - Heads are attention heads, where a heaad is one independent self-attention operation with its own Q,K,V projection. During training there are emerging properties they might specialize on but they're not controllable, or assigned, any specialization is emergent and soft. However there are ways to bias or constrain heads by applying different masks per head.
 - Good questions to ask on over sellers: 1) can the specialization be ablated? 2) Are heads hard-constraineed or probed after training? Do you enforce the heads via masking?
-- Q, K, V are Query, Key, Value matrices. People attach names and ideas but concretely they derive their meaning from math semantics as used in the equation, so:
+- Q, K, V are Query, Key, Value matrices. People attach names and ideas but concretely they derive their meaning from math semantics as used in the equation. Ie. Q/K/V are named after their position in the attention equation, not some formal meaning.
 weights = softmax(Q Kᵀ)
 output  = weights V
 Q is the thing that queries via a dot product
