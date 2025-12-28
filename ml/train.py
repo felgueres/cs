@@ -5,9 +5,18 @@ https://www.youtube.com/watch?v=kCc8FmEb1nY&list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhR
 12/27/2025
 
 Learnings:
+- [Attention Is All You Need](https://arxiv.org/pdf/1706.03762): We're implementing the decoder-only part of this paper. The left-side is the encoder which is used in machine translation and connects to this transformer using cross-attention.
 - block_size is max length of context for prediction 
 - batch_size is the number of independent sequences passed to GPUs, for efficiency
 - negative_loss_likelihood is equivalent to cross_entropy in pytorch
+- self-attention relies on a matmul trick which is to multiply a bottom-triangular matrix of ones (bottom) and zeros (top). After softmaxing that matrix with masking zeros with -inf, you get cumulative weights that basically lets tokens share information with the past, not the future. Basically, you can do weigthed agg of past elements by using matmul of a lower triangular fashion, and then elements in the lower triangular part are telling you how much of the element fuses into a position. 
+- [Dropout](https://www.jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf?utm_content=buffer79b4) is a technique to prevent overfitting, which is to disable a percentage of neurons during training, and then reenabling at test time. 
+- The original transformer paper is decoder/encoder transformer. You can train a decoder only transformer which is what's below. When you add the encoder block you can also do cross attention between the decoder-only blocks and it. The thing that makes it a decoder is the fact that we are using the triangular mask 
+- Autoregressive means that each token representation is computed using past and current tokens only, never future ones, which is introduced by the causal mask (bottom triangular mask)
+- Heads are attention heads, where a heaad is one independent self-attention operation with its own Q,K,V projection. During training there are emerging properties they might specialize on but they're not controllable, or assigned, any specialization is emergent and soft. However there are ways to bias or constrain heads by applying different masks per head.
+- Good questions to ask on over sellers: 1) can the specialization be ablated? 2) Are heads hard-constraineed or probed after training? Do you enforce the heads via masking?
+
+Input Tensor Shape: [ batch_size , block_size ]
 
 Input Tensor Shape: [ batch_size , block_size ]
 
