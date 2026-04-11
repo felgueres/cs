@@ -61,3 +61,20 @@ $\displaystyle V = \frac{U}{q}$
 
 where 1 volt = 1 joule / coulomb, ie. two points with a voltage of 1 V between them have enough "electrical pressure" to perform 1 J worth of work while moving 1 C worth of charge.
 
+The first practical circuit to learn is a **voltage divider**. It's the cannonical way to setup a sensor where you have a known resistance, variable resitance which is the sensor, and a known voltage; the voltage on the sensor is a function of it's resistance. Some notes here:
+
+![Voltage Divider](pics/voltage_divider.jpg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
