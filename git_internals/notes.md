@@ -23,3 +23,10 @@ git status -s : shortened version
 git diff : shows changes that are not staged
 git diff --staged : shows staged
 git diff --cached : shows staged so far, cached and staged are synonims 
+
+git commit : opens editor
+git commit -v : opens editor and shows the diff 
+git commit -m : inline message
+git commit -a : skips staging area and directly adds modified changes 
+
+git rm --cached <file> : removes the file if you checked in before
