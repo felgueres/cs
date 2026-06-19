@@ -30,3 +30,4 @@ git commit -m : inline message
 git commit -a : skips staging area and directly adds modified changes 
 
 git rm --cached <file> : removes the file if you checked in before
+git log -p -2: -p flag shows the patches, -<num> limits log count
